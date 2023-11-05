@@ -4,18 +4,6 @@ Berikut ada documentasi untuk menggunakan API ini
 ## Nama Database
 AUTH_TASK_PERTAMA
 
-## List API
-<li>http://localhost:8000/api/auth/register</li>
-```bash
-  Request API [ POST ]
-  
-  1."name": string,
-  2."profesi": string,
-  3."email": string,
-  4."photo": string,
-  5."password": string,
-  6."passwordConfirm": string
-
 ## Migrasi database
 ```bash
 go run migrate/migrate.go
@@ -24,3 +12,19 @@ go run migrate/migrate.go
 ```bash
 go run main.go
 ```
+
+## List API metode [ POST ]
+<li>http://localhost:8000/api/auth/register</li>
+<li>http://localhost:8000/api/auth/login</li>
+
+## Request API Reguster
+<li> "name": string</li>
+<li> "profesi": string</li>
+<li> "email": string</li>
+<li> "photo": string</li>
+<li> "password": string</li>
+<li> "passwordConfirm": string</li>
+
+## Reqyest API Login
+<li> "email": string</li>
+<li> "password": string</li>
