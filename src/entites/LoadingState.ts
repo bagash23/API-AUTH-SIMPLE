@@ -1,5 +1,4 @@
 export interface LoadingState {
-    loading: boolean;
-    setLoading?: (loading: boolean) => void;
-  }
-  
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}

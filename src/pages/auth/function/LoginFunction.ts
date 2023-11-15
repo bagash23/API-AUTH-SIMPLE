@@ -12,6 +12,7 @@ interface IReturnLogin {
     };    
     handleStateLogin: (field: string, value: string) => void;
     handleLogin: (email: string, password: string) => void;
+    loading: boolean;
 }
 
 export const useHandleLogin = (): IReturnLogin => {
@@ -21,10 +22,8 @@ export const useHandleLogin = (): IReturnLogin => {
     const [data, setData] = useState({
         email: '',
         password: '',
-    })
-    console.log("data", data.email, data.password)
-    const handleStateLogin = (field: string, value: string) => {
-        console.log("field", field, value)
+    })    
+    const handleStateLogin = (field: string, value: string) => {        
         setData(prev => ({
             ...prev,
             [field]: value,
@@ -32,14 +31,14 @@ export const useHandleLogin = (): IReturnLogin => {
     }
 
     const handleLogin = async (email: string, password: string) => {
-        console.log("email", email)
-        console.log("password", password)
         try {
             const res = await loginAccount(
                 email,
                 password
             )
-            console.log(res)
+            if (res?.status === 'success') {
+                console.log("Berhasil Login")
+            }
         } catch (error) {
             console.log(error)
         }
@@ -52,6 +51,7 @@ export const useHandleLogin = (): IReturnLogin => {
         setIsSecureEntry,
         data,        
         handleStateLogin,
-        handleLogin
+        handleLogin,
+        loading,
     }
 }

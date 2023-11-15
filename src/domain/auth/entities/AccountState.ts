@@ -1,29 +1,34 @@
-import { LoadingState } from "../../../entites/LoadingState"
+import {LoadingState} from '../../../entites/LoadingState';
 
 export interface AccountState extends LoadingState {
-    loginAccount?: (
-      email: string,
-      password: string
-    ) => Promise<{
-      success?: boolean;
-      status?: string;
-      message?: string;
-    } | undefined>;
-  
-    registerAccount?: (
-      nama: string,
+  token?: string;
+  userProfile?: {
+      name: string,
       profesi: string,
       email: string,
-      password: string
-    ) => Promise<{
-      success?: boolean;
-      status?: string;
-      message?: string;
-    } | undefined>;
+      photo: string,
   }
-  
-  export interface ResponseApi {
-    success: boolean;
-    message: string;
-    status: number;
+
+  loginAccount : (email: string, password: string) => Promise<
+      | {
+          success?: boolean;
+          status?: string;
+          message?: string;
+      }
+      | undefined
+  >;
+  registerAccount: {
+      name: string,
+      profes: string,
+      email: string,
+      photo: string,
+      passwordConfirm: string,
+      password: string,
   }
+}
+
+export interface ResponseApi {
+  success: boolean;
+  message: string;
+  status: number;
+}
