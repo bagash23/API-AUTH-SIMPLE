@@ -17,6 +17,8 @@ go run main.go
 <li>http://localhost:8000/api/auth/register</li>
 <li>http://localhost:8000/api/auth/login</li>
 <li>http://localhost:8000/api/kategori/create-kategori</li>
+<li>http://localhost:8000/api/kategori/edit-kategori/:id</li>
+<li>http://localhost:8000/api/kategori/delete-kategori/:id</li>
 <li>http://localhost:8000/api/motivasi/create-motivasi</li>
 
 ## List API metode [ GET ]
