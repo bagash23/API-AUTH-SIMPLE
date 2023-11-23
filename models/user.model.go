@@ -29,7 +29,6 @@ type SigUpInput struct {
 	Photo           string `json:"photo" binding:"required"`
 }
 
-// struct for response user information
 type UserResponse struct {
 	ID        int       `json:"id,omitempty"`
 	Name      string    `json:"name,omitempty"`

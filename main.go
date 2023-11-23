@@ -13,8 +13,12 @@ import (
 var (
 	server *gin.Engine
 
-	AuthController      controllers.AuthController
-	AuthRouteController routes.AuthRouteController
+	AuthController          controllers.AuthController
+	AuthRouteController     routes.AuthRouteController
+	MotivasiController      controllers.MotivasiController
+	MotivasiRouteController routes.MotivasiRouteController
+	KategoriController      controllers.KategoriController
+	KategoriRouteController routes.KategoriRouteController
 )
 
 func init() {
@@ -27,6 +31,12 @@ func init() {
 
 	AuthController = controllers.NewAuthController(initializers.DB)
 	AuthRouteController = routes.NewAuthRouteController(AuthController)
+
+	MotivasiController = controllers.NewMotivasiController(initializers.DB)
+	MotivasiRouteController = routes.NewMotivasiRouteController(MotivasiController)
+
+	KategoriController = controllers.NewKategoriController(initializers.DB)
+	KategoriRouteController = routes.NewKategoriRouteController(KategoriController)
 
 	server = gin.Default()
 }
@@ -44,5 +54,7 @@ func main() {
 	server.Use(cors.New(corsConfig))
 	router := server.Group("/api")
 	AuthRouteController.AuthRoute(router)
+	MotivasiRouteController.MotivasiRoute(router)
+	KategoriRouteController.KategoriRoute(router)
 	log.Fatal(server.Run(":" + config.ServerPort))
 }

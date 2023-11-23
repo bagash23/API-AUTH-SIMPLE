@@ -17,5 +17,7 @@ func init() {
 
 func main() {
 	initializers.DB.AutoMigrate(&models.User{})
+	initializers.DB.AutoMigrate(&models.Motivasi{})
+	initializers.DB.AutoMigrate(&models.Kategori{})
 	fmt.Println("Migration complete")
 }
