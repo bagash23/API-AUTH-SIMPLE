@@ -39,7 +39,7 @@ go run main.go
 <li> "password": string</li>
 <li> "passwordConfirm": string</li>
 
-## Reqyest API Login
+## Request API Login
 <li> "email": string</li>
 <li> "password": string</li>
 
