@@ -1,14 +1,13 @@
 import {create} from 'zustand';
 import {AccountState, ResponseApi} from './entities/AccountState';
-import {ApiLogin, ApiRegister} from '../../utils/api';
 import axios from 'axios';
 import {APP_PUBLIC_BASE_URL, APP_PUBLIC_LOGIN, APP_PUBLIC_REGISTER} from '@env';
-import { StoreDataValue } from '../../utils';
+import {StoreDataValue} from '../../utils';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
-const initState: AccountState = {
+const initState = {
   token: '',
   loading: false,
-  disabled: false,
   userProfile: {
     name: '',
     email: '',
@@ -21,21 +20,22 @@ export const useAccount = create<AccountState>(set => ({
   ...initState,
 
   // @ts-ignore
-  async loginAccount(email, password): ResponseApi{
-    set(() => ({loading: true, disabled: true}));
+  async loginAccount(email, password): ResponseApi {
+    set(() => ({loading: true}));
 
     try {
-      const res = await axios.post(`${APP_PUBLIC_BASE_URL}${APP_PUBLIC_LOGIN}`, {
-        email,
-        password,
-      });
-      console.log('res login:', res.data.access_token);
+      const res = await axios.post(
+        `${APP_PUBLIC_BASE_URL}${APP_PUBLIC_LOGIN}`,
+        {
+          email,
+          password,
+        },
+      );      
       set(() => ({
         loading: false,
       }));
       // @ts-ignore
-      StoreDataValue("token", res.data.access_token)
-
+      EncryptedStorage.setItem('token', res.data.access_token);
       return {
         success: true,
         message: 'Berhasil Login',
@@ -43,12 +43,6 @@ export const useAccount = create<AccountState>(set => ({
       };
     } catch (error) {
       set(() => ({loading: false}));
-
-      return {
-        success: false,
-        message: 'failed login',
-        status: error?.status,
-      };
     }
   },
 
@@ -64,20 +58,21 @@ export const useAccount = create<AccountState>(set => ({
     set(() => ({loading: true, disabled: true}));
 
     try {
-      const res = await axios.post(`${APP_PUBLIC_BASE_URL}${APP_PUBLIC_REGISTER}`, {
-        name,
-        profesi,
-        email,
-        photo,
-        passwordConfirm,
-        password,
-      })
-
-      console.log('res register:', res.data);
+      const res = await axios.post(
+        `${APP_PUBLIC_BASE_URL}${APP_PUBLIC_REGISTER}`,
+        {
+          name,
+          profesi,
+          email,
+          photo,
+          passwordConfirm,
+          password,
+        },
+      );
       set(() => ({
         loading: false,
         userProfile: res.data,
-      }))
+      }));
       return {
         success: true,
         message: 'Berhasil',
@@ -86,9 +81,5 @@ export const useAccount = create<AccountState>(set => ({
     } catch (error) {
       set(() => ({loading: false}));
     }
-  },
-
-  setDisabled: (disabled: boolean) => {
-    set(() => ({disabled}));
   },
 }));

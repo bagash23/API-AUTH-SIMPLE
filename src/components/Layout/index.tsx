@@ -7,7 +7,7 @@ import { colors } from "../../utils";
 const MainLayout = ({ headShow, children, title }: LayoutProps) => {
     return (
         <View style={{ flex: 1, backgroundColor: colors.white }} >
-            {headShow ? <HeaderComponent title={title} iconType={headShow} />: undefined}
+            {headShow ? <HeaderComponent title={title} iconType={headShow} />: <HeaderComponent title={title}/>}
             {children}
         </View>
     )

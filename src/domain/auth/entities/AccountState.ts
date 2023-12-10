@@ -3,32 +3,42 @@ import {LoadingState} from '../../../entites/LoadingState';
 export interface AccountState extends LoadingState {
   token?: string;
   userProfile?: {
-      name: string,
-      profesi: string,
-      email: string,
-      photo: string,
-  }
+    name?: string;
+    profesi?: string;
+    email?: string;
+    photo?: string;
+  };
 
-  loginAccount : (email: string, password: string) => Promise<
-      | {
-          success?: boolean;
-          status?: string;
-          message?: string;
+  loginAccount: (
+    email: string,
+    password: string,
+  ) => Promise<
+    | {
+        success?: boolean;
+        status?: string;
+        message?: string;
       }
-      | undefined
+    | undefined
   >;
-  registerAccount: {
-      name: string,
-      profes: string,
-      email: string,
-      photo: string,
-      passwordConfirm: string,
-      password: string,
-  }
+  registerAccount: (
+    name?: string,
+    profes?: string,
+    email?: string,
+    photo?: string,
+    passwordConfirm?: string,
+    password?: string,
+  ) => Promise<
+    | {
+        success?: boolean;
+        status?: string;
+        message?: string;
+      }
+    | undefined
+  >;
 }
 
 export interface ResponseApi {
-  success: boolean;
-  message: string;
-  status: number;
+  success?: boolean;
+  message?: string;
+  status?: string;
 }

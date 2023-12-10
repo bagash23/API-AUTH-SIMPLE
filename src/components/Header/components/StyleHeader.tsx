@@ -3,7 +3,7 @@ import { Fonts, colors } from '../../../utils'
 export const StyleHeader = StyleSheet.create({
     container: {
         backgroundColor: colors.white,
-        paddingVertical: 20,
+        paddingVertical: 15,
         paddingHorizontal: 25,
         shadowColor: "#000",
         shadowOffset: {
@@ -16,7 +16,8 @@ export const StyleHeader = StyleSheet.create({
         elevation: 5,
     },
     textHeader: {
-        fontSize: 20,
-        fontFamily: Fonts.primary[700]
+        fontSize: 15,
+        fontFamily: Fonts.primary[700],
+        color: colors.black1
     }
 })

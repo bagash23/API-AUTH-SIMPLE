@@ -1,8 +1,11 @@
-import { useState } from 'react';
-import { ParamListBase, useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { useAccount } from '../../../domain/auth/useAuth';
-import { launchImageLibrary, ImagePickerResponse } from 'react-native-image-picker';
+import {useState} from 'react';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useAccount} from '../../../domain/auth/useAuth';
+import {
+  launchImageLibrary,
+  ImagePickerResponse,
+} from 'react-native-image-picker';
 
 interface IReturnDaftar {
   isSecureEntry: boolean;
@@ -31,13 +34,13 @@ interface IReturnDaftar {
     name: string;
     type: string;
   };
-  setPhotoForDB: (photo: { uri: string; name: string; type: string }) => void;
+  setPhotoForDB: (photo: {uri: string; name: string; type: string}) => void;
   checkImage: () => void;
 }
 
 export const useHandleDaftar = (): IReturnDaftar => {
   const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
-  const { registerAccount } = useAccount();
+  const {registerAccount} = useAccount();
   const [isSecureEntry, setIsSecureEntry] = useState<boolean>(true);
   const [data, setData] = useState({
     name: '',
@@ -55,7 +58,7 @@ export const useHandleDaftar = (): IReturnDaftar => {
   });
 
   const handleStateDaftar = (field: string, value: string) => {
-    setData((prev) => ({
+    setData(prev => ({
       ...prev,
       [field]: value,
     }));
@@ -63,10 +66,9 @@ export const useHandleDaftar = (): IReturnDaftar => {
 
   const getImage = () => {
     launchImageLibrary(
-      { quality: 0.5, maxWidth: 200, maxHeight: 200 },
+      {quality: 0.5, maxWidth: 200, maxHeight: 200},
       (response: ImagePickerResponse) => {
         if (response.didCancel || response.error) {
-          console.log('User cancelled image picker');
         } else {
           const source = response.assets[0].uri;
           const dataImage = {
@@ -74,7 +76,7 @@ export const useHandleDaftar = (): IReturnDaftar => {
             name: response.assets[0].fileName || '',
             type: response.assets[0].type || '',
           };
-          setPhotoForDB({ ...dataImage });
+          setPhotoForDB({...dataImage});
           setPhoto(source);
         }
       },
@@ -112,7 +114,7 @@ export const useHandleDaftar = (): IReturnDaftar => {
         password,
       );
       if (res.status === 'success') {
-        navigation.replace('LoginScreen')
+        navigation.replace('LoginScreen');
       }
     } catch (error) {
       console.error(error);

@@ -1,4 +1,4 @@
 export interface HeaderProps {
-    title: string;
-    iconType: boolean;
+  title?: string;
+  iconType?: boolean;
 }
